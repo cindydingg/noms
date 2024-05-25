@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import 'react-native-gesture-handler';
+import { AuthProvider } from './backend/AuthContext.js';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Text } from 'react-native'; // Import View and Text for demonstration purposes
 import * as Font from 'expo-font';
@@ -46,7 +47,8 @@ const App = () => {
   }
 
   return (
-    <NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
       <Stack.Navigator initialRouteName="WelcomeScreen">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
@@ -64,6 +66,7 @@ const App = () => {
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
+    </AuthProvider>
   );
 };
 
