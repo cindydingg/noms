@@ -13,6 +13,7 @@ import GardenScreen from './screens/GardenScreen';
 import PlantIdentificationScreen from './screens/PlantIdentificationScreen';
 import LocationScreen from './screens/LocationScreen';
 import GameScreen from './screens/GameScreen'; // Assuming you have a GameScreen.js
+import PantryIdentificationTest from './screens/PantryIdentificationTest';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,7 @@ const App = () => {
         <Stack.Screen name="Upload" component={UploadScreen} />
         <Stack.Screen name="LevelUp" component={LevelUpScreen} />
         <Stack.Screen name="Plant Identity" component={PlantIdentificationScreen} />
+        <Stack.Screen name="Create Pantry" component={PantryIdentificationTest} />
         <Stack.Screen name="Location" component={LocationScreen} />
         <Stack.Screen name="Game" component={GameScreen} />
         <Stack.Screen name="Garden" component={GardenScreen} />
