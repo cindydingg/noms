@@ -14,7 +14,7 @@ const PantryIdentificationTest = ({ route, navigation }) => {
   const { imgBase64 } = route.params;
   const [classificationResult, setClassificationResult] = useState(null);
   const [mimeType] = useState('image/jpeg')
-  const [myIngredients, setIngredients] = useState(null);
+  const [myIngredients, setIngredients] = useState([]);
   const [user, setUser] = useState(null);
 
   // classify the uploaded image
@@ -98,10 +98,14 @@ const PantryIdentificationTest = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.boxContainer}>
-        <Text style={styles.header}>{classificationResult ? 'All Ingredients' : 'analyzing...'}</Text>
-        /*<View style={styles.plantNameContainer}>
+        <Text style={styles.header}>Plant Identity</Text>
+        <Image 
+            source={require('../assets/planttest.webp')} 
+            style={styles.plantImage}
+        />
+        <View style={styles.plantNameContainer}>
           <Text style={styles.plantName}>{classificationResult || 'analyzing...'}</Text>
-        </View>*/
+        </View>
       </View>
       <TouchableOpacity
         style={styles.button}
@@ -194,4 +198,3 @@ const styles = StyleSheet.create({
 });
 
 export default PantryIdentificationTest;
-
