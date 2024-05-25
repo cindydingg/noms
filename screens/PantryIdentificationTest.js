@@ -14,7 +14,7 @@ const PantryIdentificationTest = ({ route, navigation }) => {
   const { imgBase64 } = route.params;
   const [classificationResult, setClassificationResult] = useState(null);
   const [mimeType] = useState('image/jpeg')
-  const [myIngredients, setIngredients] = useState(0);
+  const [myIngredients, setIngredients] = useState(null);
   const [user, setUser] = useState(null);
 
   // classify the uploaded image
@@ -35,11 +35,11 @@ const PantryIdentificationTest = ({ route, navigation }) => {
     if (classificationResult && user) {
       const newIngredients = parseIngredients(classificationResult);
       setIngredients(newIngredients);
-      updateUserPoints(user.uid, calculatedPoints);
+      updateUserPantry(user.uid, newIngredients);
     }
   }, [classificationResult, user]);
 
-  const classifyPlantImage = async (imageUri) => {
+  const classifyImage = async (imageUri) => {
     if (!imageUri) {
       Alert.alert('Error', 'No image selected.');
       return null;
@@ -47,7 +47,7 @@ const PantryIdentificationTest = ({ route, navigation }) => {
   
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
-      const prompt = "Output a list of all food ingredients you see in the image, unless there are no food ingredients. Format it like this: 'Ingredient 1,Ingredient 2,Ingredient3' without the quotations. If there are no ingredients, output 'No Ingredients' without the quotations..";
+      const prompt = "Output a list of all food ingredients you see in the image, unless there are no food ingredients. Format it as a comma-delimited string like this: 'Ingredient 1,Ingredient 2,Ingredient3' without the quotations. If there are no ingredients, output an empty string.";
       const imagePart = fileToGenerativePart(imageUri, mimeType);
       
       const result = await model.generateContent([prompt, imagePart]);
@@ -64,11 +64,11 @@ const PantryIdentificationTest = ({ route, navigation }) => {
     }
   }
 
-  const updateUserPantry = async (uId) => {
+  const updateUserPantry = async (uId, newIngredients) => {
     const userRef = doc(db, 'users', uid);
     try {
       await updateDoc(userRef, {
-        ingredients: myIngredients
+        ingredients: newIngredients
       });
     } catch (error) {
       console.error("Error updating user ingredients:", error);
@@ -101,7 +101,6 @@ const PantryIdentificationTest = ({ route, navigation }) => {
     <View style={styles.container}>
       <View style={styles.boxContainer}>
         <Text style={styles.header}>Plant Identity</Text>
-        <Text style={styles.matchPercentage}>{points ? `${points}% rarity` : '<3'}</Text>
         <Image 
             source={require('../assets/planttest.webp')} 
             style={styles.plantImage}
@@ -110,7 +109,6 @@ const PantryIdentificationTest = ({ route, navigation }) => {
           <Text style={styles.plantName}>{displayClassificationResult || 'analyzing...'}</Text>
         </View>
       </View>
-      <Text style={styles.pointsHeader}> {points ? `+${points} points` : ''}</Text>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('Upload')}
