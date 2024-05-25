@@ -90,15 +90,16 @@ const Profile = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFAF1',
     alignItems: 'center',
     justifyContent: 'center',
   },
   headline: {
-    fontSize: 28,
+    fontSize: 30,
     color: '#219653',
     marginBottom: 20,
     fontWeight: '500',
+    fontFamily: 'KumbhSans-Bold'
   },
   imageContainer: {
     width: 100,

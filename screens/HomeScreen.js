@@ -44,7 +44,7 @@ const AuthenticatedScreen = ({ user, handleLogout, navigation }) => {
   return (
     <View style={styles.authContainer}>
       <Text style={styles.title}>Welcome, {user.email}!</Text>
-      <Button title="Logout" onPress={handleLogout} color="#e74c3c" />
+      <Button title="Logout" onPress={handleLogout} color="#e74c3c"/>
       <Button
         title="Go to Profile"
         onPress={() => navigation.navigate('Profile')}
@@ -143,45 +143,51 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#FFFAF1',
   },
   authContainer: {
-    width: '80%',
+    height: '50%',
+    width: '90%',
     maxWidth: 400,
-    backgroundColor: '#fff',
+    backgroundColor: '#AFCC9E',
     padding: 16,
     borderRadius: 8,
     elevation: 3,
   },
   title: {
-    fontSize: 24,
+    fontSize: 30,
     marginBottom: 16,
     textAlign: 'center',
+    fontFamily: 'KumbhSans-Bold',
+    color: '#000000'
   },
   input: {
-    height: 40,
-    borderColor: '#ddd',
-    borderWidth: 1,
+    height: 45,
+    borderColor: '#587745',
+    borderWidth: 1.5,
     marginBottom: 16,
     padding: 8,
     borderRadius: 4,
+    fontFamily: "KumbhSans-Bold",
+    backgroundColor: '#FFFFFF'
   },
   buttonContainer: {
     borderRadius: 40,
-    backgroundColor: "#6FCF97",
+    backgroundColor: "#587745",
     marginTop: 21,
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 17,
-    paddingHorizontal: 60,
+    paddingVertical: 15,
+    paddingHorizontal: 58,
   },
   buttonText: {
     color: "#FFF",
-    fontFamily: " _500Medium",
+    fontFamily: "KumbhSans-Bold",
   },
   toggleText: {
     color: '#3498db',
     textAlign: 'center',
+    fontFamily: "KumbhSans-Bold"
   },
   bottomContainer: {
     marginTop: 20,
@@ -190,5 +196,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     marginBottom: 20,
+    fontFamily: "KumbhSans-Bold"
   },
 });
