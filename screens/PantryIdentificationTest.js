@@ -47,7 +47,7 @@ const PantryIdentificationTest = ({ route, navigation }) => {
   
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
-      const prompt = "Output a list of all food ingredients you see in the image, unless there are no food ingredients. Format it as a comma-delimited string like this: 'Ingredient 1,Ingredient 2,Ingredient3' without the quotations. If there are no ingredients, output an empty string.";
+      const prompt = "Output a list of all food items you see in the image, unless there are no food items. Format it as a comma-delimited string like this: 'Item 1,Item 2,Item 3' without the quotations. If there are no food items, output an empty string.";
       const imagePart = fileToGenerativePart(imageUri, mimeType);
       
       const result = await model.generateContent([prompt, imagePart]);
@@ -64,12 +64,10 @@ const PantryIdentificationTest = ({ route, navigation }) => {
     }
   }
 
-  const updateUserPantry = async (uId, newIngredients) => {
+  const updateUserPantry = async (uid, newIngredients) => {
     const userRef = doc(db, 'users', uid);
     try {
-      await updateDoc(userRef, {
-        ingredients: newIngredients
-      });
+      await updateDoc(userRef, { ingredients: newIngredients });
     } catch (error) {
       console.error("Error updating user ingredients:", error);
     }
@@ -106,7 +104,7 @@ const PantryIdentificationTest = ({ route, navigation }) => {
             style={styles.plantImage}
         />
         <View style={styles.plantNameContainer}>
-          <Text style={styles.plantName}>{displayClassificationResult || 'analyzing...'}</Text>
+          <Text style={styles.plantName}>{classificationResult || 'analyzing...'}</Text>
         </View>
       </View>
       <TouchableOpacity
