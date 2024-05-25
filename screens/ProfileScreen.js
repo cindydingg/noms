@@ -75,7 +75,7 @@ const Profile = ({ navigation }) => {
         )}
       </View>
       <TouchableOpacity style={styles.button} onPress={pickImage}>
-        <Text style={styles.buttonText}>Add Profile Picture</Text>
+        <Text style={styles.buttonText}>Edit Profile Picture</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Pantry')}>
         <Text style={styles.buttonText}>View Pantry</Text>

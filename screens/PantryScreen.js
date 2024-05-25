@@ -1,8 +1,9 @@
-import React from 'react';
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
 
 const PantryScreen = ({ navigation }) => {
-  const fridgeItems = [
+  const [fridgeItems, setFridgeItems] = useState([
     { name: 'Canned Tomatoes', quantity: '1' },
     { name: 'Garlic Cloves', quantity: '5' },
     { name: 'Onions', quantity: '2' },
@@ -19,25 +20,61 @@ const PantryScreen = ({ navigation }) => {
     { name: 'Coconut Oil', quantity: '1' },
     { name: 'Yogurt', quantity: '1 gallon' },
     { name: 'Strawberries', quantity: '1 box' },
-  ];
+  ]);
+
+  const handleDelete = (index) => {
+    Alert.alert(
+      "Delete Item",
+      "Are you sure you want to delete this item?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        {
+          text: "Delete",
+          onPress: () => {
+            const newItems = [...fridgeItems];
+            newItems.splice(index, 1);
+            setFridgeItems(newItems);
+          }
+        }
+      ]
+    );
+  };
+
+  const renderRightActions = (index) => {
+    return (
+      <TouchableOpacity style={styles.deleteButton} onPress={() => handleDelete(index)}>
+        <Text style={styles.deleteButtonText}>Delete</Text>
+      </TouchableOpacity>
+    );
+  };
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.header}>Your Pantry</Text>
-      {fridgeItems.map((item, index) => (
-        <View key={index} style={styles.itemContainer}>
-          <Text style={styles.itemName}>{item.name}</Text>
-          <Text style={styles.itemQuantity}>{item.quantity}</Text>
-        </View>
-      ))}
-      <TouchableOpacity 
-        style={styles.button} 
-        onPress={() => navigation.navigate('Upload')}
-      >
-        <Text style={styles.buttonText}>Add</Text>
-      </TouchableOpacity>
-      <View style={styles.footerSpace} />
-    </ScrollView>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ScrollView style={styles.container}>
+        <Text style={styles.header}>Your Pantry</Text>
+        {fridgeItems.map((item, index) => (
+          <Swipeable
+            key={index}
+            renderRightActions={() => renderRightActions(index)}
+          >
+            <View style={styles.itemContainer}>
+              <Text style={styles.itemName}>{item.name}</Text>
+              <Text style={styles.itemQuantity}>{item.quantity}</Text>
+            </View>
+          </Swipeable>
+        ))}
+        <TouchableOpacity 
+          style={styles.button} 
+          onPress={() => navigation.navigate('Upload')}
+        >
+          <Text style={styles.buttonText}>Add</Text>
+        </TouchableOpacity>
+        <View style={styles.footerSpace} />
+      </ScrollView>
+    </GestureHandlerRootView>
   );
 };
 
@@ -68,6 +105,19 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
+  deleteButton: {
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 80,
+    borderRadius: 8,
+    marginVertical: 4,
+  },
+  deleteButtonText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
   button: {
     backgroundColor: '#6FCF97',
     paddingHorizontal: 20,
@@ -81,7 +131,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   footerSpace: {
-    height: 50, 
+    height: 50,
   },
 });
 
