@@ -100,7 +100,7 @@ const PantryIdentificationTest = ({ route, navigation }) => {
       <View style={styles.boxContainer}>
         <Text style={styles.header}>Plant Identity</Text>
         <Image 
-            source={require('../assets/planttest.webp')} 
+            source={require('../assets/spaghetti.jpeg')} 
             style={styles.plantImage}
         />
         <View style={styles.plantNameContainer}>

@@ -123,7 +123,7 @@ const PlantIdentificationScreen = ({ route, navigation }) => {
         <Text style={styles.header}>Plant Identity</Text>
         <Text style={styles.matchPercentage}>{points ? `${points}% rarity` : '<3'}</Text>
         <Image 
-            source={require('../assets/planttest.webp')} 
+            source={require('../assets/spaghettiphoto.jpeg')} 
             style={styles.plantImage}
         />
         <View style={styles.plantNameContainer}>

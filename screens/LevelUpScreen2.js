@@ -19,7 +19,7 @@ const LevelUpScreen = ({ navigation }) => {
 
       <Text style={styles.expandedGardenText}>Your garden has expanded!</Text>
       <Image
-        source={require('../assets/calla-lily.png')}
+        source={require('../assets/spaghetti.jpeg')}
         style={styles.callaLilyImage}
         resizeMode="contain"
       />
