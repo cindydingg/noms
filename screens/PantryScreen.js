@@ -222,6 +222,13 @@ const PantryScreen = ({ navigation }) => {
         >
           <Text style={styles.buttonText}>Add</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity 
+          style={styles.button} 
+          onPress={() => navigation.navigate('Recipe Gen', {myIngredients: fridgeItems})}
+        >
+          <Text style={styles.buttonText}>Generate Recipes</Text>
+        </TouchableOpacity>
         <View style={styles.footerSpace} />
       </ScrollView>
     </GestureHandlerRootView>

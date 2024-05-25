@@ -81,6 +81,9 @@ const Profile = ({ navigation }) => {
         <Text style={styles.buttonText}>View Pantry</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Recipe')}>
+        <Text style={styles.buttonText}>Recipes</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Recipe Gen')}>
         <Text style={styles.buttonText}>Generate Recipes</Text>
       </TouchableOpacity>
     </View>
