@@ -2,13 +2,13 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const plants = [
-  { id: 1, name: 'Pasta', date: 'May 24, 2024', image: require('../assets/pasta.png') },
-  { id: 2, name: 'Fried Rice', date: 'May 24, 2024', image: require('../assets/friedrice.png') },
-  { id: 3, name: 'Caesar Salad', date: 'May 24, 2024', image: require('../assets/CaesarSalad.png') },
-  { id: 4, name: 'Turkey Sandwich', date: 'May 24, 2024', image: require('../assets/TurkeySandwhich.png') },
-  { id: 5, name: 'Chicken Noodle Soup', date: 'May 24, 2024', image: require('../assets/ChickenNoodleSoup.png') },
-  { id: 6, name: 'Oatmeal', date: 'May 24, 2024', image: require('../assets/Oatmeal.png') },
+const recipes = [
+  { id: 1, name: 'Pasta', date: 'May 24, 2024', image: require('../assets/spaghetti.jpeg'), screen: 'Spaghetti' },
+  { id: 2, name: 'Fried Rice', date: 'May 24, 2024', image: require('../assets/friedrice.png'), screen: 'FriedRiceDetail' },
+  { id: 3, name: 'Caesar Salad', date: 'May 24, 2024', image: require('../assets/CaesarSalad.png'), screen: 'CaesarSaladDetail' },
+  { id: 4, name: 'Tanghulu', date: 'May 24, 2024', image: require('../assets/orangetanghulu.jpeg'), screen: 'Tanghulu' },
+  { id: 5, name: 'Chicken Noodle Soup', date: 'May 24, 2024', image: require('../assets/ChickenNoodleSoup.png'), screen: 'ChickenNoodleSoupDetail' },
+  { id: 6, name: 'Oatmeal', date: 'May 24, 2024', image: require('../assets/Oatmeal.png'), screen: 'OatmealDetail' },
 ];
 
 const RecipeScreen = () => {
@@ -17,15 +17,15 @@ const RecipeScreen = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.grid}>
-        {plants.map((plant) => (
+        {recipes.map((recipe) => (
           <TouchableOpacity 
-            key={plant.id} 
+            key={recipe.id} 
             style={styles.card}
-            onPress={() => navigation.navigate('RecipeDetail', { name: plant.name, date: plant.date, image: plant.image })}
+            onPress={() => navigation.navigate(recipe.screen)}
           >
-            <Image source={plant.image} style={styles.image} />
-            <Text style={styles.name}>{plant.name}</Text>
-            <Text style={styles.date}>{plant.date}</Text>
+            <Image source={recipe.image} style={styles.image} />
+            <Text style={styles.name}>{recipe.name}</Text>
+            <Text style={styles.date}>{recipe.date}</Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   card: {
-    width: '45%', // roughly two cards per row
+    width: '45%',
     alignItems: 'center',
     marginBottom: 20,
   },

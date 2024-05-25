@@ -47,8 +47,8 @@ const UploadScreen = ({ navigation }) => {
   const handleToIdentify = async () => {
     try {
       if (capturedImageUri) {
-        await MediaLibrary.createAssetAsync(capturedImageUri);
-        Alert.alert("Photo saved", "Your photo was successfully saved in your media library.");
+        // await MediaLibrary.createAssetAsync(capturedImageUri);
+        // Alert.alert("Photo saved", "Your photo was successfully saved in your media library.");
         navigation.navigate('Create Pantry', { imgBase64: imgBase64 });
       } else {
         Alert.alert("No Image", "You haven't captured any image yet.");
@@ -68,7 +68,7 @@ const UploadScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>Scan Your Species</Text>
+        <Text style={styles.headerText}>Scan Your Pantry</Text>
       </View>
       {capturedImageUri ? (
         <Image source={{ uri: capturedImageUri }} style={styles.previewContainer} />
@@ -83,7 +83,7 @@ const UploadScreen = ({ navigation }) => {
       <View style={styles.buttonsContainer}>
         <ButtonComponent text="Cancel" onPress={handleCancel} />
         <ButtonComponent text="Take Photo" onPress={handleCapture} />
-        <ButtonComponent text="Identify!" onPress={handleToIdentify} />
+        <ButtonComponent text="Analyze!" onPress={handleToIdentify} />
       </View>
     </View>
   );

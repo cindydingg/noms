@@ -75,13 +75,16 @@ const Profile = ({ navigation }) => {
         )}
       </View>
       <TouchableOpacity style={styles.button} onPress={pickImage}>
-        <Text style={styles.buttonText}>Upload Profile Picture</Text>
+        <Text style={styles.buttonText}>Edit Profile Picture</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Upload')}>
-        <Text style={styles.buttonText}>Add to Garden</Text>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Pantry')}>
+        <Text style={styles.buttonText}>View Pantry</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Recipe')}>
-        <Text style={styles.buttonText}>View Recipes</Text>
+        <Text style={styles.buttonText}>Recipes</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Recipe Gen')}>
+        <Text style={styles.buttonText}>Generate Recipes</Text>
       </TouchableOpacity>
     </View>
   );

@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, Alert } from 'react-native';
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GOOGLE_API_KEY } from '@env';
 
-const genAI = new GoogleGenerativeAI(key="AIzaSyABO4W2bUHvP5BZkeGDe_5js5Z_aVx5TF4");
+const genAI = new GoogleGenerativeAI({ key: GOOGLE_API_KEY });
 
-import { db, auth } from '../backend/firebaseConfig'; // adjust the path as necessary
+import { db, auth } from '../backend/firebaseConfig';
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore"; 
 
 const { width } = Dimensions.get('window');
@@ -17,7 +18,6 @@ const PantryIdentificationTest = ({ route, navigation }) => {
   const [myIngredients, setIngredients] = useState([]);
   const [user, setUser] = useState(null);
 
-  // classify the uploaded image
   useEffect(() => {
     classifyImage(imgBase64);
   }, [imgBase64]);
@@ -30,7 +30,6 @@ const PantryIdentificationTest = ({ route, navigation }) => {
     return () => unsubscribe();
   }, []);
 
-  // update the ingredients state when calssificationResult updates
   useEffect(() => {
     if (classificationResult && user) {
       const newIngredients = parseIngredients(classificationResult);
@@ -102,7 +101,6 @@ const PantryIdentificationTest = ({ route, navigation }) => {
     }
   }
 
-  // funciton to get all ingredients 
   const parseIngredients = (resultString) => {
     if (resultString.endsWith("no ingredients")) {
       return [];
@@ -117,7 +115,7 @@ const PantryIdentificationTest = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.boxContainer}>
-        <Text style={styles.header}>Plant Identity</Text>
+        <Text style={styles.header}>Food Identification</Text>
         <Image 
             source={require('../assets/spaghetti.jpeg')} 
             style={styles.plantImage}
@@ -134,7 +132,7 @@ const PantryIdentificationTest = ({ route, navigation }) => {
           navigation.navigate('Profile');
         }}
       >
-        <Text style={styles.buttonTextPhoto}>Overwrite Pantry</Text>
+        <Text style={styles.buttonTextPhoto}>Create New Pantry</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -144,14 +142,14 @@ const PantryIdentificationTest = ({ route, navigation }) => {
           navigation.navigate('Profile');
         }}
       >
-        <Text style={styles.buttonTextPhoto}>Add To Pantry</Text>
+        <Text style={styles.buttonTextPhoto}>Add to Pantry</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('Upload')}
       >
-        <Text style={styles.buttonTextPhoto}>new photo</Text>
+        <Text style={styles.buttonTextPhoto}>New Photo</Text>
       </TouchableOpacity>
     </View>
   );
@@ -162,7 +160,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    // justifyContent: 'center',
   },
   header: {
     fontSize: 30,
@@ -188,9 +185,9 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   plantImage: {
-    width: 150, // Set the width as needed
-    height: 150, // Set the height as needed
-    resizeMode: 'contain', // Keep the plant image aspect ratio
+    width: 150,
+    height: 150,
+    resizeMode: 'contain',
     marginTop: 20
   },
   plantNameContainer: {
@@ -229,10 +226,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 50,
     alignItems: 'center',
-    shadowColor: '#6FCF97', // These shadow properties are for iOS
+    shadowColor: '#6FCF97',
     shadowOffset: { width: 0, height: 1},
     shadowOpacity: 1,
-    // shadowRadius: 3,
     marginTop: 30,
   },
 });
