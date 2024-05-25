@@ -199,5 +199,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PlantIdentificationScreen;
+export default PantryIdentificationTest;
 
