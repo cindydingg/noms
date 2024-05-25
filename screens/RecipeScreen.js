@@ -2,15 +2,15 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 
 const plants = [
-  { id: 1, name: 'Gardenia', date: 'April 21, 2024', image: require('../assets/babysbreath.jpg') },
-  { id: 2, name: 'Japanese Maple Tree', date: 'April 21, 2024', image: require('../assets/japmaple.jpg') },
-  { id: 3, name: 'Dandelion', date: 'April 21, 2024', image: require('../assets/dandelion.jpeg') },
-  { id: 4, name: 'Wisteria', date: 'April 21, 2024', image: require('../assets/wisteria.jpg') },
-  { id: 5, name: 'Orchid', date: 'April 21, 2024', image: require('../assets/orchid.jpg') },
-  { id: 6, name: 'Lily', date: 'April 21, 2024', image: require('../assets/lily.jpg') },
+  { id: 1, name: 'Pasta', date: 'May 24, 2024', image: require('../assets/pasta.png') },
+  { id: 2, name: 'Fried Rice', date: 'May 24, 2024', image: require('../assets/friedrice.png') },
+  { id: 3, name: 'Caesar Salad', date: 'May 24, 2024', image: require('../assets/CaesarSalad.png') },
+  { id: 4, name: 'Turkey Sandwich', date: 'May 24, 2024', image: require('../assets/TurkeySandwhich.png') },
+  { id: 5, name: 'Chicken Noodle Soup', date: 'May 24, 2024', image: require('../assets/ChickenNoodleSoup.png') },
+  { id: 6, name: 'Oatmeal', date: 'May 24, 2024', image: require('../assets/Oatmeal.png') },
 ];
 
-const GardenScreen = () => {
+const RecipeScreen = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.grid}>
@@ -57,5 +57,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GardenScreen;
-
+export default RecipeScreen;
