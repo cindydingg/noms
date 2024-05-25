@@ -82,9 +82,8 @@ const createUserDocument = async (user) => {
     await setDoc(doc(db, "users", user.uid), {
       email: user.email,
       profilePic: null,
-      points: 0,
+      ingredients: [],
       images: [],
-      level: 0,
     });
     console.log('New user document created successfully:', user.uid);
   } catch (error) {

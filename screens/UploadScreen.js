@@ -49,7 +49,7 @@ const UploadScreen = ({ navigation }) => {
       if (capturedImageUri) {
         await MediaLibrary.createAssetAsync(capturedImageUri);
         Alert.alert("Photo saved", "Your photo was successfully saved in your media library.");
-        navigation.navigate('Plant Identity', { imgBase64: imgBase64 });
+        navigation.navigate('Create Pantry', { imgBase64: imgBase64 });
       } else {
         Alert.alert("No Image", "You haven't captured any image yet.");
       }

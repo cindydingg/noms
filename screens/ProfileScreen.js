@@ -80,11 +80,8 @@ const Profile = ({ navigation }) => {
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Upload')}>
         <Text style={styles.buttonText}>Add to Garden</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Garden')}>
-        <Text style={styles.buttonText}>View Garden</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ViewRecipe')}>
-        <Text style={styles.buttonText}>View Recipe</Text>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Recipe')}>
+        <Text style={styles.buttonText}>View Recipes</Text>
       </TouchableOpacity>
     </View>
   );
