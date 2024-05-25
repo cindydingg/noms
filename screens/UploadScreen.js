@@ -47,8 +47,6 @@ const UploadScreen = ({ navigation }) => {
   const handleToIdentify = async () => {
     try {
       if (capturedImageUri) {
-        // await MediaLibrary.createAssetAsync(capturedImageUri);
-        // Alert.alert("Photo saved", "Your photo was successfully saved in your media library.");
         navigation.navigate('Create Pantry', { imgBase64: imgBase64 });
       } else {
         Alert.alert("No Image", "You haven't captured any image yet.");
@@ -95,11 +93,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 80,
+    paddingVertical: 50,
     paddingHorizontal: 28,
   },
   headerContainer: {
-    marginTop: 43,
+    marginTop: 10,
   },
   headerText: {
     color: "#219653",
