@@ -35,9 +35,8 @@ const PantryIdentificationTest = ({ route, navigation }) => {
     if (classificationResult && user) {
       const newIngredients = parseIngredients(classificationResult);
       setIngredients(newIngredients);
-      updateUserPantry(user.uid, newIngredients);
     }
-  }, [classificationResult, user]);
+  }, [classificationResult]);
 
   const classifyImage = async (imageUri) => {
     if (!imageUri) {
@@ -47,7 +46,7 @@ const PantryIdentificationTest = ({ route, navigation }) => {
   
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
-      const prompt = "Output a list of all food items you see in the image, unless there are no food items. Format it as a comma-delimited string like this: 'Item 1,Item 2,Item 3' without the quotations. If there are no food items, output an empty string.";
+      const prompt = "Output a list of all food items you see in the image, unless there are no food items. Format it as a comma-delimited string like this: 'Item 1, Item 2, Item 3' without the quotations. If there are no food items, output 'No ingredients' without the quotations.";
       const imagePart = fileToGenerativePart(imageUri, mimeType);
       
       const result = await model.generateContent([prompt, imagePart]);
@@ -64,7 +63,7 @@ const PantryIdentificationTest = ({ route, navigation }) => {
     }
   }
 
-  const updateUserPantry = async (uid, newIngredients) => {
+  const writeUserPantry = async (uid, newIngredients) => {
     const userRef = doc(db, 'users', uid);
     try {
       await updateDoc(userRef, { ingredients: newIngredients });
@@ -72,7 +71,21 @@ const PantryIdentificationTest = ({ route, navigation }) => {
       console.error("Error updating user ingredients:", error);
     }
   };
-  
+
+  const appendUserPantry = async (uid, newIngredients) => {
+    const userRef = doc(db, 'users', uid);
+    try {
+      const userDoc = await getDoc(userRef);
+      const userData = userDoc.data();
+      allIngredients = userData.ingredients || [];
+      allIngredients = allIngredients.concat(newIngredients);
+      await updateDoc(userRef, {ingredients: allIngredients});
+    }
+    catch (error) {
+      console.error("Error appending user ingredients", error);
+    }
+  };
+
   function fileToGenerativePart(uri) {
     const prefix = 'data:image/jpeg;base64,';
     if (uri.startsWith(prefix)) {
@@ -91,7 +104,7 @@ const PantryIdentificationTest = ({ route, navigation }) => {
 
   // funciton to get all ingredients 
   const parseIngredients = (resultString) => {
-    const allIngredients = resultString.split(",");
+    const allIngredients = resultString.split(", ");
     return allIngredients;
   }
 
@@ -107,6 +120,27 @@ const PantryIdentificationTest = ({ route, navigation }) => {
           <Text style={styles.plantName}>{classificationResult || 'analyzing...'}</Text>
         </View>
       </View>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          writeUserPantry(user.uid, myIngredients);
+          navigation.navigate('Profile');
+        }}
+      >
+        <Text style={styles.buttonTextPhoto}>Overwrite Pantry</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          appendUserPantry(user.uid, myIngredients);
+          navigation.navigate('Profile');
+        }}
+      >
+        <Text style={styles.buttonTextPhoto}>Add To Pantry</Text>
+      </TouchableOpacity>
+
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('Upload')}
