@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   card: {
-    width: '45%', // roughly two cards per row
+    width: '45%',
     alignItems: 'center',
     marginBottom: 20,
   },

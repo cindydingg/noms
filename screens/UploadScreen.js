@@ -68,7 +68,7 @@ const UploadScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>Scan Your Species</Text>
+        <Text style={styles.headerText}>Scan Your Pantry</Text>
       </View>
       {capturedImageUri ? (
         <Image source={{ uri: capturedImageUri }} style={styles.previewContainer} />
