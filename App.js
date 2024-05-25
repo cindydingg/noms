@@ -18,10 +18,10 @@ import PlantIdentificationScreen from './screens/PlantIdentificationScreen';
 import LocationScreen from './screens/LocationScreen';
 import GameScreen from './screens/GameScreen';
 import PantryIdentificationTest from './screens/PantryIdentificationTest';
-import RecipeDetailScreen from './screens/RecipeDetailScreen';
+import RecipeDetailScreen from './screens/SpaghettiDetail.js';
 import PantryScreen from './screens/PantryScreen';
 import WelcomeScreen from './screens/Welcome';
-
+import TanghuluDetail from './screens/TanghuluDetail.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -60,9 +60,10 @@ const App = () => {
         <Stack.Screen name="Location" component={LocationScreen} />
         <Stack.Screen name="Game" component={GameScreen} />
         <Stack.Screen name="Recipe" component={RecipeScreen} />
-        <Stack.Screen name="RecipeDetail" component={RecipeDetailScreen} />
+        <Stack.Screen name="Spaghetti" component={RecipeDetailScreen} />
         <Stack.Screen name="Pantry" component={PantryScreen} />
         <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+        <Stack.Screen name="Tanghulu" component={TanghuluDetail} />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>

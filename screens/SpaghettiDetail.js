@@ -66,6 +66,7 @@ const RecipeDetailScreen = () => {
       </View>
       <Text style={styles.stepDescription}>Pour spaghetti in a strainer over the sink to drain. Serve with the tomato sauce. Enjoy!</Text>
       <Image source={require('../assets/spaghetti.jpeg')} style={styles.stepImage} />
+      <View style={styles.bottomSpace} />
     </ScrollView>
   );
 };
@@ -150,6 +151,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 10,
   },
+  bottomSpace: {
+    height: 50, // Adjust this value as needed
+  },  
 });
 
 export default RecipeDetailScreen;
