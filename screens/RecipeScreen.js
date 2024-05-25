@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const plants = [
   { id: 1, name: 'Pasta', date: 'May 24, 2024', image: require('../assets/pasta.png') },
@@ -11,15 +12,21 @@ const plants = [
 ];
 
 const RecipeScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.grid}>
         {plants.map((plant) => (
-          <View key={plant.id} style={styles.card}>
+          <TouchableOpacity 
+            key={plant.id} 
+            style={styles.card}
+            onPress={() => navigation.navigate('RecipeDetail', { name: plant.name, date: plant.date, image: plant.image })}
+          >
             <Image source={plant.image} style={styles.image} />
             <Text style={styles.name}>{plant.name}</Text>
             <Text style={styles.date}>{plant.date}</Text>
-          </View>
+          </TouchableOpacity>
         ))}
       </View>
     </ScrollView>
