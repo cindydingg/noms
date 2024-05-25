@@ -82,8 +82,8 @@ const UploadScreen = ({ navigation }) => {
       )}
       <View style={styles.buttonsContainer}>
         <ButtonComponent text="Cancel" onPress={handleCancel} />
-        <ButtonComponent text="Take Photo" onPress={handleCapture} />
-        <ButtonComponent text="Identify!" onPress={handleToIdentify} />
+        <ButtonComponent text="Scan" onPress={handleCapture} />
+        <ButtonComponent text="Analyze!" onPress={handleToIdentify} />
       </View>
     </View>
   );

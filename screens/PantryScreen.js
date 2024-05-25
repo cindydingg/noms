@@ -23,7 +23,7 @@ const PantryScreen = ({ navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.header}>Your Fridge</Text>
+      <Text style={styles.header}>Your Pantry</Text>
       {fridgeItems.map((item, index) => (
         <View key={index} style={styles.itemContainer}>
           <Text style={styles.itemName}>{item.name}</Text>
@@ -34,7 +34,7 @@ const PantryScreen = ({ navigation }) => {
         style={styles.button} 
         onPress={() => navigation.navigate('Upload')}
       >
-        <Text style={styles.buttonText}>Pantry Identification</Text>
+        <Text style={styles.buttonText}>Add</Text>
       </TouchableOpacity>
       <View style={styles.footerSpace} />
     </ScrollView>
