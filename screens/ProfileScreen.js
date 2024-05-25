@@ -39,7 +39,7 @@ const Profile = ({ navigation }) => {
     });
 
     if (!result.cancelled) {
-      const image = result.uri;
+      const image = result.assets[0].uri;
       setImageUri(image);
       uploadImage(user, image);
     }
