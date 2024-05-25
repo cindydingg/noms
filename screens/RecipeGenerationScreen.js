@@ -13,6 +13,7 @@ const { width } = Dimensions.get('window');
 const RecipeGenerationScreen = ({ route, navigation }) => {
   //const [classificationResult, setClassificationResult] = useState(null);
   //const [myIngredients, setIngredients] = useState([]);
+  const { myIngredients } = route.params;
   const [textResult, setResult] = useState(null);
   const [recipes, setRecipes] = useState([]);
   const [user, setUser] = useState(null);
@@ -28,14 +29,12 @@ const RecipeGenerationScreen = ({ route, navigation }) => {
   }, []);
 
   useEffect(() => {
-    if (user) {
-      const ingredients = getIngredients(user.uid);
-      console.log("my ingredients are" + ingredients); 
-      getRecipes(ingredients.toString());
-    }
-  }, [user]);
+    getRecipes(myIngredients);
+  }, [myIngredients]);
 
-  const getIngredients = (uid) => {
+  /*
+  const getIngredients = async (uid) => {
+    console.log(uid);
     const userRef = doc(db, 'users', uid);
     try {
       const userDoc = await getDoc(userRef);
@@ -45,9 +44,28 @@ const RecipeGenerationScreen = ({ route, navigation }) => {
       return myIngredients;
     }
     catch (error) {
-      console.error("Error appending user ingredients", error);
+      console.error("Error getting user ingredients", error);
     }
-  };
+  };*/
+
+  /*
+  useEffect(() => {
+    if (user) {
+      const userRef = doc(db, 'users', user.uid);
+      let myIngredients = []; 
+      try {
+        const userDoc = await getDoc(userRef);
+        const userData = userDoc.data();
+        myIngredients = userData.ingredients || [];
+        console.log("initial getting of ingredients is: " + myIngredients);
+      }
+      catch (error) {
+        console.error("Error getting user ingredients", error);
+      }
+      console.log("my ingredients are" + myIngredients); 
+      getRecipes(myIngredients.toString());
+    }
+  }, [user]);*/
 
   const getRecipes = async (ingredients) => {
     try {
