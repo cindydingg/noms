@@ -18,6 +18,8 @@ import GameScreen from './screens/GameScreen';
 import PantryIdentificationTest from './screens/PantryIdentificationTest';
 import RecipeDetailScreen from './screens/RecipeDetailScreen';
 import PantryScreen from './screens/PantryScreen';
+import WelcomeScreen from './screens/Welcome';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -44,7 +46,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="WelcomeScreen">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
@@ -57,6 +59,7 @@ const App = () => {
         <Stack.Screen name="Recipe" component={RecipeScreen} />
         <Stack.Screen name="RecipeDetail" component={RecipeDetailScreen} />
         <Stack.Screen name="Pantry" component={PantryScreen} />
+        <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
