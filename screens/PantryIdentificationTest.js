@@ -46,7 +46,7 @@ const PantryIdentificationTest = ({ route, navigation }) => {
   
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
-      const prompt = "Output a list of all food items you see in the image, unless there are no food items. Format it as a comma-delimited string like this: 'Item 1, Item 2, Item 3' without the quotations. If there are no food items, output 'No ingredients' without the quotations.";
+      const prompt = "Output a list of all food items you see in the image, unless there are no food items. Format it as a comma-delimited string like this: 'Item 1, Item 2, Item 3' without the quotations. If there are no food items, output 'no ingredients' without the quotations.";
       const imagePart = fileToGenerativePart(imageUri, mimeType);
       
       const result = await model.generateContent([prompt, imagePart]);
@@ -104,7 +104,13 @@ const PantryIdentificationTest = ({ route, navigation }) => {
 
   // funciton to get all ingredients 
   const parseIngredients = (resultString) => {
-    const allIngredients = resultString.split(", ");
+    if (resultString.endsWith("no ingredients")) {
+      return [];
+    }
+    allIngredients = resultString.split(",");
+    for (let i = 0; i < allIngredients.length; i++) {
+      allIngredients[i] = allIngredients[i].trim().toLowerCase();
+    }
     return allIngredients;
   }
 
