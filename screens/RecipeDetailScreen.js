@@ -1,6 +1,7 @@
+import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
-const RecipeScreen = ({ navigation }) => {
+const RecipeDetailScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.headerText}>Spaghetti with Marinara Sauce</Text>
@@ -25,3 +26,94 @@ const RecipeScreen = ({ navigation }) => {
       <Text style={styles.stepDescription}>Peel and finely chop garlic, cut bell pepper in half.</Text>
       <Image source={require('../assets/chopping.jpeg')} style={styles.stepImage} />
     </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#FFF",
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+  },
+  headerText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontFamily: 'KumbhSans-Bold', // Use custom font
+  },
+  image: {
+    width: '100%',
+    height: 200,
+    marginTop: 20,
+    borderRadius: 10,
+  },
+  iconsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  iconText: {
+    fontSize: 16,
+    marginHorizontal: 10,
+    fontFamily: 'KumbhSans-Regular', // Use custom font
+  },
+  subHeaderText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 20,
+    fontFamily: 'KumbhSans-Bold', // Use custom font
+  },
+  ingredientText: {
+    fontSize: 16,
+    marginTop: 5,
+    fontFamily: 'KumbhSans-Regular', // Use custom font
+  },
+  inStockContainer: {
+    backgroundColor: '#E0E0E0',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 5,
+    alignSelf: 'flex-start',
+    marginTop: 10,
+  },
+  inStockText: {
+    fontSize: 16,
+    fontFamily: 'KumbhSans-Regular', // Use custom font
+  },
+  stepContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  stepNumber: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    backgroundColor: '#E0E0E0',
+    borderRadius: 50,
+    width: 30,
+    height: 30,
+    textAlign: 'center',
+    lineHeight: 30,
+    marginRight: 10,
+    fontFamily: 'KumbhSans-Bold', // Use custom font
+  },
+  stepText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    fontFamily: 'KumbhSans-Bold', // Use custom font
+  },
+  stepDescription: {
+    fontSize: 16,
+    marginTop: 10,
+    fontFamily: 'KumbhSans-Regular', // Use custom font
+  },
+  stepImage: {
+    width: '100%',
+    height: 150,
+    marginTop: 10,
+    borderRadius: 10,
+  },
+});
+
+export default RecipeDetailScreen;

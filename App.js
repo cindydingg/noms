@@ -15,7 +15,6 @@ import RecipeScreen from './screens/RecipeScreen';
 import PlantIdentificationScreen from './screens/PlantIdentificationScreen';
 import LocationScreen from './screens/LocationScreen';
 import GameScreen from './screens/GameScreen';
-import RecipeScreen from './screens/RecipeScreen';
 import PantryIdentificationTest from './screens/PantryIdentificationTest';
 import RecipeDetailScreen from './screens/RecipeDetailScreen';
 
