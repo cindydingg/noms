@@ -98,14 +98,10 @@ const PantryIdentificationTest = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.boxContainer}>
-        <Text style={styles.header}>Plant Identity</Text>
-        <Image 
-            source={require('../assets/planttest.webp')} 
-            style={styles.plantImage}
-        />
-        <View style={styles.plantNameContainer}>
+        <Text style={styles.header}>{classificationResult ? 'All Ingredients' : 'analyzing...'}</Text>
+        /*<View style={styles.plantNameContainer}>
           <Text style={styles.plantName}>{classificationResult || 'analyzing...'}</Text>
-        </View>
+        </View>*/
       </View>
       <TouchableOpacity
         style={styles.button}
