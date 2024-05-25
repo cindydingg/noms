@@ -10,7 +10,7 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
 const { width } = Dimensions.get('window');
 
-const PantryIdentificationTest = ({ route, navigation }) => {
+const RecipeGenerationScreen = ({ route, navigation }) => {
   //const [classificationResult, setClassificationResult] = useState(null);
   //const [myIngredients, setIngredients] = useState([]);
   const [textResult, setResult] = useState(null);
@@ -18,10 +18,6 @@ const PantryIdentificationTest = ({ route, navigation }) => {
   const [user, setUser] = useState(null);
 
   // generate recipes
-  useEffect(() => {
-    const ingredients = getIngredients(user.uid);
-    getRecipes(ingredients);
-  }, [user]);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -31,12 +27,22 @@ const PantryIdentificationTest = ({ route, navigation }) => {
     return () => unsubscribe();
   }, []);
 
-  const getIngredients = async (uid) => {
+  useEffect(() => {
+    if (user) {
+      const ingredients = getIngredients(user.uid);
+      console.log("my ingredients are" + ingredients); 
+      getRecipes(ingredients.toString());
+    }
+  }, [user]);
+
+  const getIngredients = (uid) => {
     const userRef = doc(db, 'users', uid);
     try {
       const userDoc = await getDoc(userRef);
       const userData = userDoc.data();
-      return userData.ingredients || [];
+      const myIngredients = userData.ingredients || [];
+      console.log("initial getting of ingredients is: " + myIngredients);
+      return myIngredients;
     }
     catch (error) {
       console.error("Error appending user ingredients", error);
@@ -45,8 +51,11 @@ const PantryIdentificationTest = ({ route, navigation }) => {
 
   const getRecipes = async (ingredients) => {
     try {
+      console.log(ingredients);
+      console.log("hehe" + ingredients);
+      console.log(typeof ingredients);
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const prompt = "I have the following ingredients: " + ingrediants.join(", ") + ". What are seven common recipes I can make with " +
+      const prompt = "I have the following ingredients: " + ingredients + ". What are seven common recipes I can make with " +
                      "these ingredients and the corresponding percentage of ingredients I already have for the recipe, expressed as an integer between " +
                      "1 and 100? Output the result in this format without the quotations: 'recipe 1 - 100 || recipe 2 - 70 || recipe 3 - 60', with the " +
                      "recipes sorted from greatest to least percentage of existing ingredients.";
