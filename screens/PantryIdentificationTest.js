@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, Alert } from 'react-native';
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GOOGLE_API_KEY } from '@env';
 
-const genAI = new GoogleGenerativeAI(key="AIzaSyABO4W2bUHvP5BZkeGDe_5js5Z_aVx5TF4");
+const genAI = new GoogleGenerativeAI({ key: GOOGLE_API_KEY });
 
 import { db, auth } from '../backend/firebaseConfig';
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore"; 
