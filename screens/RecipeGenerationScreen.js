@@ -32,41 +32,6 @@ const RecipeGenerationScreen = ({ route, navigation }) => {
     getRecipes(myIngredients);
   }, [myIngredients]);
 
-  /*
-  const getIngredients = async (uid) => {
-    console.log(uid);
-    const userRef = doc(db, 'users', uid);
-    try {
-      const userDoc = await getDoc(userRef);
-      const userData = userDoc.data();
-      const myIngredients = userData.ingredients || [];
-      console.log("initial getting of ingredients is: " + myIngredients);
-      return myIngredients;
-    }
-    catch (error) {
-      console.error("Error getting user ingredients", error);
-    }
-  };*/
-
-  /*
-  useEffect(() => {
-    if (user) {
-      const userRef = doc(db, 'users', user.uid);
-      let myIngredients = []; 
-      try {
-        const userDoc = await getDoc(userRef);
-        const userData = userDoc.data();
-        myIngredients = userData.ingredients || [];
-        console.log("initial getting of ingredients is: " + myIngredients);
-      }
-      catch (error) {
-        console.error("Error getting user ingredients", error);
-      }
-      console.log("my ingredients are" + myIngredients); 
-      getRecipes(myIngredients.toString());
-    }
-  }, [user]);*/
-
   const getRecipes = async (ingredients) => {
     try {
       console.log(ingredients);
@@ -75,13 +40,14 @@ const RecipeGenerationScreen = ({ route, navigation }) => {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       const prompt = "I have the following ingredients: " + ingredients + ". What are seven common recipes I can make with " +
                      "these ingredients and the corresponding percentage of ingredients I already have for the recipe, expressed as an integer between " +
-                     "1 and 100? Output the result in this format without the quotations: 'recipe 1 - 100 || recipe 2 - 70 || recipe 3 - 60', with the " +
-                     "recipes sorted from greatest to least percentage of existing ingredients.";
+                     "1 and 100? Output the result in this format without the quotations: 'recipe 1 - 100 || recipe 2 - 70 || recipe 3 - 60'. Sort the " +
+                     "recipes from greatest to least percentage of existing ingredients. Do not output anything other than this.";
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const text = await response.text();
       console.log(text);
       setResult(text);
+      parseRecipes(text);
       return text;
    } catch (error) {
       console.error("Error:", error);
@@ -100,28 +66,19 @@ const RecipeGenerationScreen = ({ route, navigation }) => {
       const thisPercent = recipeData[1].trim();
       allRecipes.push([thisRecipe, thisPercent]);
     }
+    setRecipes(allRecipes);
     return allRecipes;
   }
 
   return (
     <View style={styles.container}>
-      <View style={styles.boxContainer}>
-        <Text style={styles.header}>Plant Identity</Text>
-        <Image 
-            source={require('../assets/spaghetti.jpeg')} 
-            style={styles.plantImage}
-        />
-        <View style={styles.plantNameContainer}>
-          <Text style={styles.plantName}>{textResult || 'analyzing...'}</Text>
-        </View>
-      </View>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Upload')}
-      >
-        <Text style={styles.buttonTextPhoto}>new photo</Text>
-      </TouchableOpacity>
+      <Text style={styles.header}>Possible Recipes</Text>
+      <ScrollView style={styles.container}>
+        {recipes.map((item, index) => (
+          <Text style={styles.plantName}>{item[0]}</Text>
+          <progress value={{item[1]}} max={100}>{currentValue}%</progress>
+        ))};
+      </ScrollView>
     </View>
   );
 };
