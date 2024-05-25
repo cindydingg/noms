@@ -5,7 +5,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(key="AIzaSyABO4W2bUHvP5BZkeGDe_5js5Z_aVx5TF4");
 
-import { db, auth } from '../backend/firebaseConfig'; // adjust the path as necessary
+import { db, auth } from '../backend/firebaseConfig';
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore"; 
 
 const { width } = Dimensions.get('window');
@@ -24,7 +24,6 @@ const PlantIdentificationScreen = ({ route, navigation }) => {
     return result;
   };
 
-  // Process classificationResult before rendering
   const displayClassificationResult = processClassificationResult(classificationResult);
 
   useEffect(() => {
@@ -42,7 +41,7 @@ const PlantIdentificationScreen = ({ route, navigation }) => {
   useEffect(() => {
     if (classificationResult && user) {
       const calculatedPoints = parsePoints(classificationResult);
-      setPoints(calculatedPoints);  // Update points state when classificationResult updates
+      setPoints(calculatedPoints); 
       updateUserPoints(user.uid, calculatedPoints);
     }
   }, [classificationResult, user]);
@@ -115,10 +114,8 @@ const PlantIdentificationScreen = ({ route, navigation }) => {
       const percentage = parseInt(match[1], 10);
       return percentage;
     }
-    return 0; // Return 0 if no percentage is found
+    return 0;
   };
-
-  // Calculate points from the result
 
   return (
     <View style={styles.container}>
@@ -149,7 +146,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    // justifyContent: 'center',
   },
   header: {
     fontSize: 30,
@@ -175,9 +171,9 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   plantImage: {
-    width: 150, // Set the width as needed
-    height: 150, // Set the height as needed
-    resizeMode: 'contain', // Keep the plant image aspect ratio
+    width: 150,
+    height: 150, 
+    resizeMode: 'contain',
     marginTop: 20
   },
   plantNameContainer: {
@@ -216,10 +212,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 50,
     alignItems: 'center',
-    shadowColor: '#6FCF97', // These shadow properties are for iOS
+    shadowColor: '#6FCF97',
     shadowOffset: { width: 0, height: 1},
     shadowOpacity: 1,
-    // shadowRadius: 3,
     marginTop: 30,
   },
 });

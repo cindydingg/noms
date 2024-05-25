@@ -44,14 +44,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
-    marginRight: 30, // Adds space between the image and the text
-    marginLeft: 30, // Adds space between the image and the text
+    marginRight: 30,
+    marginLeft: 30,
   },
   firstItem: {
     flex: 1,
-    width: 50, // Set an appropriate width
-    height: 50, // Set an appropriate height
-    marginRight: 10, // Adds space between the image and the text
+    width: 50,
+    height: 50,
+    marginRight: 10,
   },
   backButton: {
     flex: 2,
@@ -59,8 +59,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 20,
-    // marginBottom: 20,
-    // marginTop: 5,
   },
   backButtonText: {
     color: '#FFFFFF',
@@ -88,7 +86,7 @@ const styles = StyleSheet.create({
     lineHeight: 23,
     color: '#426B1F',
     fontWeight: 'bold',
-    textAlign: 'center', // Corrects alignment for the text
+    textAlign: 'center',
     marginBottom: 30,
   },
   callaLilyImage: {

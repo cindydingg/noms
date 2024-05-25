@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native'; // Import View and Text for demonstration purposes
+import * as Font from 'expo-font';
+import AppLoading from 'expo-app-loading';
 
 import HomeScreen from './screens/HomeScreen';
 import SignUpScreen from './screens/SignUpScreen';
@@ -12,11 +14,32 @@ import LevelUpScreen from './screens/LevelUpScreen2';
 import GardenScreen from './screens/GardenScreen';
 import PlantIdentificationScreen from './screens/PlantIdentificationScreen';
 import LocationScreen from './screens/LocationScreen';
-import GameScreen from './screens/GameScreen'; // Assuming you have a GameScreen.js
+import GameScreen from './screens/GameScreen';
+import RecipeScreen from './screens/RecipeScreen';
 
 const Stack = createNativeStackNavigator();
 
+const loadFonts = async () => {
+  await Font.loadAsync({
+    'KumbhSans-Regular': require('./assets/fonts/KumbhSans-Regular.ttf'),
+    'KumbhSans-Bold': require('./assets/fonts/KumbhSans-Bold.ttf'),
+  });
+};
+
 const App = () => {
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      await loadFonts();
+      setFontsLoaded(true);
+    })();
+  }, []);
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
@@ -29,6 +52,7 @@ const App = () => {
         <Stack.Screen name="Location" component={LocationScreen} />
         <Stack.Screen name="Game" component={GameScreen} />
         <Stack.Screen name="Garden" component={GardenScreen} />
+        <Stack.Screen name="ViewRecipe" component={RecipeScreen} /> 
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
@@ -39,6 +63,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#E4F6F3',
+  },
+  text: {
+    fontFamily: 'KumbhSans-Regular',
+  },
+  boldText: {
+    fontFamily: 'KumbhSans-Bold',
   },
 });
 
