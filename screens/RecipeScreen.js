@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     paddingTop: 20,
+    backgroundColor: '#FFFAF1',
   },
   grid: {
     flexDirection: 'row',
@@ -57,10 +58,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginTop: 5,
+    fontFamily: 'KumbhSans-Bold',
   },
   date: {
     fontSize: 14,
     color: '#666',
+    fontFamily: 'KumbhSans-Bold',
   },
 });
 

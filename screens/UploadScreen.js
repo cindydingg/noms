@@ -90,7 +90,7 @@ const UploadScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFF",
+    backgroundColor: "#FFFAF1",
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: 50,
@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
     color: "#219653",
     textAlign: "center",
     fontSize: 28,
+    fontFamily: "KumbhSans-Bold"
   },
   previewContainer: {
     flex: 1,
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    backgroundColor: "#6FCF97",
+    backgroundColor: "#82A36E",
     borderRadius: 40,
     marginHorizontal: 10,
     paddingVertical: 15,
@@ -128,6 +129,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#FFF",
     fontSize: 16,
+    fontFamily: "KumbhSans-Bold"
   },
 });
 

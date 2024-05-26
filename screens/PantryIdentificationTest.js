@@ -6,7 +6,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const genAI = new GoogleGenerativeAI(key="AIzaSyABO4W2bUHvP5BZkeGDe_5js5Z_aVx5TF4");
 
 import { db, auth } from '../backend/firebaseConfig';
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore"; 
+import { doc, getDoc, updateDoc } from "firebase/firestore"; 
 
 const { width } = Dimensions.get('window');
 
@@ -117,7 +117,7 @@ const PantryIdentificationTest = ({ route, navigation }) => {
       <View style={styles.boxContainer}>
         <Text style={styles.header}>Ingredients</Text>
         {loading ? (
-          <ActivityIndicator size="large" color="#219653" style={styles.spinner} />
+          <ActivityIndicator size="large" color="#82A36E" style={styles.spinner} />
         ) : myIngredients.length > 0 ? (
           myIngredients.map((ingredient, index) => (
             <View key={index} style={styles.ingredientBox}>
@@ -164,19 +164,20 @@ const PantryIdentificationTest = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#FFFAF1',
     alignItems: 'center',
     paddingVertical: 20,
   },
   header: {
     fontSize: 30,
-    color: '#219653',
+    color: '#82A36E',
     fontWeight: 'bold',
     marginTop: 20,
+    fontFamily: 'KumbhSans-Bold',
   },
   recipeNameContainer: {
     backgroundColor: 'transparent',
-    borderColor: "#6FCF97",
+    borderColor: "#82A36E",
     borderWidth: 2,
     paddingHorizontal: 40,
     paddingVertical: 10,
@@ -186,11 +187,12 @@ const styles = StyleSheet.create({
   recipeName: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#219653',
+    color: '#82A36E',
     textAlign: 'center',
+    fontFamily: 'KumbhSans-Bold',
   },
   ingredientBox: {
-    backgroundColor: '#6FCF97',
+    backgroundColor: '#82A36E',
     padding: 10,
     borderRadius: 10,
     margin: 5,
@@ -198,9 +200,10 @@ const styles = StyleSheet.create({
   ingredientText: {
     fontSize: 18,
     color: '#fff',
+    fontFamily: 'KumbhSans-Bold',
   },
   button: {
-    backgroundColor: '#219653',
+    backgroundColor: '#82A36E',
     paddingHorizontal: 30,
     paddingVertical: 15,
     borderRadius: 25,
@@ -212,6 +215,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#FFFFFF',
     textAlign: 'center',
+    fontFamily: 'KumbhSans-Bold',
   },
   boxContainer: {
     backgroundColor: 'white',
