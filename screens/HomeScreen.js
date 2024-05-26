@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, TextInput, Button, ScrollView, StyleSheet, TouchableOpacity, Animated, Easing } from 'react-native';
 import { db, auth } from '../backend/firebaseConfig'; // Adjust the path as necessary
 import { doc, setDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from '@firebase/auth';
@@ -69,6 +69,25 @@ export default HomeScreen = ({ navigation }) => {
     });
     return () => unsubscribe();
   }, []);
+    const opacity = useRef(new Animated.Value(0)).current;
+    const translateY = useRef(new Animated.Value(25)).current;
+  useEffect(() => {
+    Animated.parallel([
+      Animated.timing(opacity, {
+        toValue: 1,
+        duration: 1000,
+        easing: Easing.inOut(Easing.ease),
+        useNativeDriver: true,
+      }),
+      Animated.timing(translateY, {
+        toValue: 0,
+        duration: 1000,
+        easing: Easing.inOut(Easing.ease),
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, [opacity, translateY]);
+
 
   const createUserDocument = async (user) => {
     try {
@@ -106,6 +125,9 @@ export default HomeScreen = ({ navigation }) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+        <Animated.Image 
+        source={require('../assets/bok-choy.png')} 
+        style={[styles.topRightGraphic, {opacity: opacity, transform: [{translateY: translateY}],}]}/>
       {user ? (
         <AuthenticatedScreen user={user} handleLogout={handleLogout} navigation={navigation} />
       ) : (
@@ -134,36 +156,41 @@ const styles = StyleSheet.create({
   authContainer: {
     width: '90%',
     maxWidth: 400,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#FFFAF1',
     padding: 16,
     borderRadius: 8,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 8,
+  },
+  topRightGraphic: {
+    width: '50%',
+    height: '50%',
+    position: 'absolute',
+    left: 220,
+    bottom: 510,
+    resizeMode: 'contain',
+    transform: [{ rotate: '10deg' }],
   },
   title: {
-    fontSize: 24,
+    fontSize: 36,
+    position: 'relative',
     marginBottom: 16,
     textAlign: 'center',
     fontFamily: 'KumbhSans-Bold',
     color: '#333333',
   },
   input: {
-    height: 45,
+    height: 46,
     borderColor: '#DDDDDD',
-    borderWidth: 1,
+    borderWidth: 1.2,
     marginBottom: 16,
-    padding: 8,
-    borderRadius: 4,
+    padding: 7,
+    borderRadius: 10,
     fontFamily: 'KumbhSans-Regular',
-    backgroundColor: '#F9F9F9',
+    backgroundColor: '#FCFCFC',
   },
   buttonContainer: {
     backgroundColor: '#82A36E',
     borderRadius: 25,
-    paddingVertical: 12,
+    paddingVertical: 14,
     alignItems: 'center',
     marginVertical: 10,
   },

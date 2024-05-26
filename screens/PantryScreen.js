@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#FFFAF1',
   },
   header: {
     fontSize: 24,
@@ -272,7 +272,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   button: {
-    backgroundColor: '#6FCF97',
+    backgroundColor: '#82A36E',
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 20,
@@ -282,6 +282,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#FFFFFF',
     fontSize: 16,
+    fontFamily: 'KumbhSans-Bold'
   },
   footerSpace: {
     height: 50,

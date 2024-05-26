@@ -59,7 +59,7 @@ const TanghuluDetail = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFF",
+    backgroundColor: "#FFFAF1",
     paddingHorizontal: 20,
     paddingVertical: 30,
   },
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   stepNumber: {
     fontSize: 24,
     fontWeight: 'bold',
-    backgroundColor: '#E0E0E0',
+    backgroundColor: '#AFCC9E',
     borderRadius: 50,
     width: 30,
     height: 30,

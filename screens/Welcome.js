@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, Animated, Easing } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, Animated, Easing, Touchable } from 'react-native';
 
 const WelcomeScreen = ({ navigation }) => {
     const opacity = useRef(new Animated.Value(0)).current;
@@ -23,7 +23,7 @@ const WelcomeScreen = ({ navigation }) => {
     }, [opacity, translateY]);
     
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Home')} activeOpacity={1}>
             <Animated.Image
                 source={require('../assets/bok-choy.png')}
                 style={[styles.image, {opacity: opacity, transform: [{translateY: translateY}],}]}/>
@@ -32,10 +32,10 @@ const WelcomeScreen = ({ navigation }) => {
             </Animated.View>
             <TouchableOpacity onPress={() => navigation.navigate('Home')}>
                 <Animated.View style={{opacity: opacity, transform: [{translateY: translateY}]}}>
-                    <Text style={styles.buttonText}>Tap here to enter</Text>
+                    <Text style={styles.buttonText}>Tap to enter</Text>
                 </Animated.View>
             </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
     );
 };
 

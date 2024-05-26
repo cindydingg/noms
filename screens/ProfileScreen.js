@@ -66,7 +66,7 @@ const Profile = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.headline}>Profile</Text>
+      <Text style={styles.headline}> My Profile</Text>
       <View style={styles.imageContainer}>
         {imageUri ? (
           <Image source={{ uri: imageUri }} style={styles.image} />
@@ -95,15 +95,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headline: {
-    fontSize: 30,
-    color: '#219653',
+    fontSize: 40,
+    color: '#587745',
     marginBottom: 20,
     fontWeight: '500',
     fontFamily: 'KumbhSans-Bold'
   },
   imageContainer: {
-    width: 100,
-    height: 100,
+    width: 150,
+    height: 150,
     borderRadius: 100,
     marginBottom: 20,
     justifyContent: 'center',
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   button: {
-    backgroundColor: '#6FCF97',
+    backgroundColor: '#82A36E',
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 20,
@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#FFFFFF',
     fontSize: 16,
+    fontFamily: 'KumbhSans-Bold'
   },
 });
 
