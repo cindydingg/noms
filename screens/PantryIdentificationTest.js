@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Dimensions, TouchableOpacity, Alert, ScrollView } from 'react-native';
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
@@ -16,6 +16,7 @@ const PantryIdentificationTest = ({ route, navigation }) => {
   const [mimeType] = useState('image/jpeg');
   const [myIngredients, setIngredients] = useState([]);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     classifyImage(imgBase64);
@@ -43,6 +44,7 @@ const PantryIdentificationTest = ({ route, navigation }) => {
     }
 
     try {
+      setLoading(true);
       const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
       const prompt = "Output a list of all food items you see in the image, unless there are no food items. Format it as a comma-delimited string like this: 'Item 1, Item 2, Item 3' without the quotations. If there are no food items, output 'no ingredients' without the quotations.";
       const imagePart = fileToGenerativePart(imageUri, mimeType);
@@ -52,11 +54,13 @@ const PantryIdentificationTest = ({ route, navigation }) => {
       const text = await response.text();
       console.log(text);
       setClassificationResult(text);
+      setLoading(false);
       return text;
 
     } catch (error) {
       console.error("Error:", error);
       Alert.alert('Classification Error', 'Failed to classify the image. Please try again.');
+      setLoading(false);
       return null;
     }
   }

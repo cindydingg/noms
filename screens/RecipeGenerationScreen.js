@@ -78,13 +78,26 @@ const RecipeGenerationScreen = ({ route, navigation }) => {
         <Text style={styles.header}>Recipe Suggestions</Text>
         {recipes.length > 0 ? (
           recipes.map((recipe, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.recipeButton}
-              onPress={() => navigation.navigate('RecipeDetail', { recipeName: recipe.name, recipePercent: recipe.percent })}
-            >
-              <Text style={styles.recipeButtonText}>{recipe.name}</Text>
-            </TouchableOpacity>
+            // <TouchableOpacity
+            //   key={index}
+            //   style={styles.recipeButton}
+            //   onPress={() => navigation.navigate('SpaghettiDetail', { recipeName: recipe.name, recipePercent: recipe.percent })}
+            // >
+            //   <Text style={styles.recipeButtonText}>{recipe.name}</Text>
+            // </TouchableOpacity>
+<TouchableOpacity
+  key={index}
+  style={styles.recipeButton}
+  onPress={() => {
+    if (recipe.name.toLowerCase() === 'tanghulu') {
+      navigation.navigate('Tanghulu', { recipeName: recipe.name, recipePercent: recipe.percent });
+    } else {
+      navigation.navigate('Spaghetti', { recipeName: recipe.name, recipePercent: recipe.percent });
+    }}}
+>
+  <Text style={styles.recipeButtonText}>{recipe.name}</Text>
+</TouchableOpacity>
+
           ))
         ) : (
           <View style={styles.recipeNameContainer}>
