@@ -28,17 +28,24 @@ const RecipeGenerationScreen = ({ route, navigation }) => {
   }, [myIngredients]);
 
   const getRecipes = async (ingredients) => {
+    if (ingredients.length == 0) {
+      setResult("no ingredients");
+      parsedRecipes = parseRecipes("");
+      setRecipes(parsedRecipes);
+      return "no ingredients";
+    }
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const prompt = "I have the following ingredients: " + ingredients + ". What are seven common recipes I can make with " +
-                     "these ingredients and the corresponding percentage of ingredients I already have for the recipe, expressed as an integer between " +
-                     "1 and 100? Output the result in this format without the quotations: 'recipe 1 - 100 || recipe 2 - 70 || recipe 3 - 60', with the " +
-                     "recipes sorted from greatest to least percentage of existing ingredients. Don't output anything else.";
+      prompt = "I have the following ingredients: " + ingredients + ". I want to make one of the following: sphagetti with marinara sauce, fried " +
+                     "rice, caesar salad, tanghulu, chicken noodle soup, or oatmeal. For each of these recipes, what is the percentage of ingredientes " +
+                     "I already have ,expressed as an integer between 1 and 100? Output the result in this format: " +
+                     "recipe 1 - 100 || recipe 2 - 70 || recipe 3 - 60  with the recipes sorted from greatest to least percentage of existing ingredients. " +
+                     "Don't output anything else";
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const text = await response.text();
       setResult(text);
-      const parsedRecipes = parseRecipes(text);
+      parsedRecipes = parseRecipes(text);
       setRecipes(parsedRecipes);
       return text;
    } catch (error) {
@@ -55,7 +62,12 @@ const RecipeGenerationScreen = ({ route, navigation }) => {
       const recipeData = recipeStrings[i].split("-"); 
       const thisRecipe = recipeData[0].trim();
       const thisPercent = recipeData[1].trim();
-      allRecipes.push({ name: thisRecipe, percent: thisPercent });
+      if (thisPercent != 0) {
+        allRecipes.push({ name: thisRecipe, percent: thisPercent });
+      }
+    }
+    if (allRecipes.length == 0) {
+      allRecipes.push({ name: "no matching recipes for your pantry", percent: 0 });
     }
     return allRecipes;
   }
