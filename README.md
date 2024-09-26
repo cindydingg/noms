@@ -11,3 +11,6 @@ Noms is a mobile application developed with Expo and integrated with the Gemini 
 - **Backend:** Firebase
 - **Platform:** React Native with Expo
 - **Languages:** JavaScript, HTML, CSS
+
+## Devpost
+https://devpost.com/software/noms
